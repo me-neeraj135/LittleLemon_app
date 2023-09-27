@@ -8,19 +8,19 @@ import MenuItems from "./components/MenuItems.js";
 export default function App() {
   return (
     <>
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: "#495E57",
-        }}
-      >
+      <View style={styles.container}>
         <LittleLemonHeader />
         {/* <WelcomeScreen /> */}
         <MenuItems />
       </View>
-      <View style={{ backgroundColor: "#495E57" }}>
+      <View style={styles.footer}>
         <LittleLemonFooter />
       </View>
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: "#495E57" },
+  footer: { backgroundColor: "#495E57" },
+});
