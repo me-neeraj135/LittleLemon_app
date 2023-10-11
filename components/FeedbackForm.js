@@ -45,6 +45,7 @@ function FeedbackForm() {
           value={phoneNumber}
           placeholder="Phone Number"
           onChageText={onChangePhoneNumber}
+          keyboardType="numeric"
         ></TextInput>
         <TextInput
           style={styles.messageInput}
