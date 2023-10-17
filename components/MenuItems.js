@@ -1,36 +1,5 @@
-import React from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  FlatList,
-  SectionList,
-} from "react-native";
-
-// const menuItemsToDisplay = [
-//   { name: "Hummus", price: "$5.00", id: "1A" },
-//   { name: "Moutabal", price: "$5.00", id: "2B" },
-//   { name: "Falafel", price: "$7.50", id: "3C" },
-//   { name: "Marinated Olives", price: "$5.00", id: "4D" },
-//   { name: "Kofta", price: "$5.00", id: "5E" },
-//   { name: "Eggplant Salad", price: "$8.50", id: "6F" },
-//   { name: "Lentil Burger", price: "$10.00", id: "7G" },
-//   { name: "Smoked Salmon", price: "$14.00", id: "8H" },
-//   { name: "Kofta Burger", price: "$11.00", id: "9I" },
-//   { name: "Turkish Kebab", price: "$15.50", id: "10J" },
-//   { name: "Fries", price: "$3.00", id: "11K" },
-//   { name: "Buttered Rice", price: "$3.00", id: "12L" },
-//   { name: "Bread Sticks", price: "$3.00", id: "13M" },
-//   { name: "Pita Pocket", price: "$3.00", id: "14N" },
-//   { name: "Lentil Soup", price: "$3.75", id: "15O" },
-//   { name: "Greek Salad", price: "$6.00", id: "16Q" },
-//   { name: "Rice Pilaf", price: "$4.00", id: "17R" },
-//   { name: "Baklava", price: "$3.00", id: "18S" },
-//   { name: "Tartufo", price: "$3.00", id: "19T" },
-//   { name: "Tiramisu", price: "$5.00", id: "20U" },
-//   { name: "Panna Cotta", price: "$5.00", id: "21V" },
-// ];
+import React, { useState } from "react";
+import { View, Text, StyleSheet, SectionList, Pressable } from "react-native";
 
 const menuItemsToDisplay = [
   {
@@ -76,8 +45,7 @@ const menuItemsToDisplay = [
   },
 ];
 
-// const Header = () => <Text style={styles.headerText}>View Menu</Text>;
-const Separator = () => <View style={styles.Separator} />;
+const Separator = () => <View style={styles.separator} />;
 const Footer = () => (
   <Text style={styles.footerText}>
     {" "}
@@ -96,19 +64,41 @@ const Item = ({ name, price }) => (
 );
 
 function MenuItems() {
+  const [showMenu, setMenu] = useState(false);
   const renderItem = ({ item }) => <Item name={item.name} price={item.price} />;
   return (
-    <View style={styles.container}>
-      <SectionList
-        keyExtractor={(item, index) => item + index}
-        sections={menuItemsToDisplay}
-        renderItem={renderItem}
-        renderSectionHeader={renderSectionHeader}
-        ItemSeparatorComponent={Separator}
-        ListFooterComponent={Footer}
-        // ListHeaderComponent={Header}
-      ></SectionList>
-    </View>
+    <>
+      {!showMenu && (
+        <View style={styles.container}>
+          <Text style={styles.infoSection}>
+            Little Lemon is a charming neighborhood bistro that serves simple
+            food and classic cocktails in a lively but casual environment. View
+            our menu to explore our cuisine with daily specials!
+          </Text>
+        </View>
+      )}
+      <Pressable
+        style={styles.button}
+        onPress={() => {
+          setMenu(!showMenu);
+        }}
+      >
+        <Text style={styles.buttonText}>{showMenu ? `Home` : `View Menu`}</Text>
+      </Pressable>
+
+      {showMenu && (
+        <View style={styles.container}>
+          <SectionList
+            keyExtractor={(item, index) => item + index}
+            sections={menuItemsToDisplay}
+            renderItem={renderItem}
+            renderSectionHeader={renderSectionHeader}
+            ItemSeparatorComponent={Separator}
+            ListFooterComponent={Footer}
+          ></SectionList>
+        </View>
+      )}
+    </>
   );
 }
 
@@ -116,20 +106,12 @@ export default MenuItems;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.75,
+    flex: 1,
   },
   innerContainer: {
     paddingHorizontal: 40,
     paddingVertical: 20,
-    // backgroundColor: "black",
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  headerText: {
-    color: "white",
-    fontSize: 40,
-    flexWrap: "wrap",
-    textAlign: "center",
+    backgroundColor: "#333333",
   },
   sectionHeader: {
     backgroundColor: "#fbdabb",
@@ -140,16 +122,40 @@ const styles = StyleSheet.create({
   },
   itemText: {
     color: "#F4CE14",
-    fontSize: 25,
+    fontSize: 32,
   },
-  Separator: {
+  separator: {
     borderBottomWidth: 1,
-    borderColor: "white",
+    borderColor: "#EDEFEE",
   },
   footerText: {
     color: "#EDEFEE",
     fontSize: 20,
     flexWrap: "wrap",
     textAlign: "center",
+  },
+  button: {
+    fontSize: 22,
+    padding: 10,
+    marginVertical: 40,
+    margin: 40,
+    backgroundColor: "#EDEFEE",
+    borderColor: "#EDEFEE",
+    borderWidth: 2,
+    borderRadius: 12,
+  },
+  buttonText: {
+    color: "#333333",
+    textAlign: "center",
+    fontSize: 32,
+  },
+  infoSection: {
+    fontSize: 24,
+    padding: 20,
+
+    marginVertical: 20,
+    color: "#EDEFEE",
+    textAlign: "center",
+    backgroundColor: "#495E57",
   },
 });
