@@ -5,12 +5,23 @@ import {
   StyleSheet,
   Image,
   ImageBackground,
+  useColorScheme,
+  useWindowDimensions,
 } from "react-native";
 
 const logo = require("../assets/images/littleLogo.png");
 function WelcomeScreen() {
+  const colorScheme = useColorScheme();
+  const { height, width, scale, fontScale } = useWindowDimensions();
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={[
+        styles.container,
+        colorScheme === `light`
+          ? { backgroundColor: `white` }
+          : { backgroundColor: `#333333` },
+      ]}
+    >
       <Image
         style={styles.logo}
         source={logo}
@@ -18,16 +29,17 @@ function WelcomeScreen() {
         accessible={true}
         accessibilityLabel={"Little Lemon Logo"}
       />
-      <Text style={styles.title}>
-        Little Lemon, your local Mediterranean Bistro
+      <Text
+        style={[
+          styles.regularText,
+          colorScheme === "light" ? { color: "#333333" } : { color: "#EDEFEE" },
+        ]}
+      >
+        Little Lemon is a charming neighborhood bistro that serves simple food
+        and classic cocktails in a lively but casual environment. We would love
+        to hear your experience with us!
       </Text>
-      <Image
-        style={styles.img}
-        source={require("../assets/images/brooke-lark-HjWzkqW1dgI-unsplash.jpg")}
-        resizeMode="cover"
-        accessible={true}
-        accessibilityLabel={"food picture1"}
-      />
+
       <Image
         style={styles.img}
         source={require("../assets/images/edgar-castrejon-1SPu0KT-Ejg-unsplash.jpg")}
@@ -35,20 +47,11 @@ function WelcomeScreen() {
         accessible={true}
         accessibilityLabel={"food picture2"}
       />
-      <Image
-        style={styles.img}
-        source={require("../assets/images/mekht-GuvimT4IFok-unsplash.jpg")}
-        resizeMode="cover"
-        accessible={true}
-        accessibilityLabel={"food picture3"}
-      />
-      <Image
-        style={styles.img}
-        source={require("../assets/images/wikisleep-app-qvIrI4ueqzY-unsplash.jpg")}
-        resizeMode="cover"
-        accessible={true}
-        accessibilityLabel={"food picture4"}
-      />
+      <Text style={styles.regular}>Color Scheme:{colorScheme}</Text>
+      <Text style={styles.regular}>height :{height}</Text>
+      <Text style={styles.regular}>width:{width}</Text>
+      <Text style={styles.regular}>scal:{scale}</Text>
+      <Text style={styles.regular}>fontScale:{fontScale}</Text>
     </ScrollView>
   );
 }
@@ -73,5 +76,12 @@ const styles = StyleSheet.create({
   bgImg: {
     flex: 1,
     justifyContent: `center`,
+  },
+  regularText: {
+    fontSize: 24,
+    padding: 20,
+    marginVertical: 8,
+    color: "#EDEFEE",
+    textAlign: "center",
   },
 });
