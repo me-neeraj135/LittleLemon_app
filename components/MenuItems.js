@@ -63,30 +63,12 @@ const Item = ({ name, price }) => (
   </View>
 );
 
-function MenuItems() {
-  const [showMenu, setMenu] = useState(false);
+function MenuItems({ navigation }) {
+  // const [showMenu, setMenu] = useState(false);
   const renderItem = ({ item }) => <Item name={item.name} price={item.price} />;
   return (
     <>
-      {!showMenu && (
-        <View style={styles.container}>
-          <Text style={styles.infoSection}>
-            Little Lemon is a charming neighborhood bistro that serves simple
-            food and classic cocktails in a lively but casual environment. View
-            our menu to explore our cuisine with daily specials!
-          </Text>
-        </View>
-      )}
-      <Pressable
-        style={styles.button}
-        onPress={() => {
-          setMenu(!showMenu);
-        }}
-      >
-        <Text style={styles.buttonText}>{showMenu ? `Home` : `View Menu`}</Text>
-      </Pressable>
-
-      {showMenu && (
+      {
         <View style={styles.container}>
           <SectionList
             keyExtractor={(item, index) => item + index}
@@ -96,8 +78,11 @@ function MenuItems() {
             ItemSeparatorComponent={Separator}
             ListFooterComponent={Footer}
           ></SectionList>
+          <Pressable onPress={() => navigation.goBack()}>
+            <Text style={styles.goBackBtn}>Go back</Text>
+          </Pressable>
         </View>
-      )}
+      }
     </>
   );
 }
@@ -129,7 +114,6 @@ const styles = StyleSheet.create({
     borderColor: "#EDEFEE",
   },
   footerText: {
-    color: "#EDEFEE",
     fontSize: 20,
     flexWrap: "wrap",
     textAlign: "center",
@@ -157,5 +141,9 @@ const styles = StyleSheet.create({
     color: "#EDEFEE",
     textAlign: "center",
     backgroundColor: "#495E57",
+  },
+  goBackBtn: {
+    fontSize: 18,
+    textAlign: `center`,
   },
 });

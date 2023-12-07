@@ -7,10 +7,11 @@ import {
   ImageBackground,
   useColorScheme,
   useWindowDimensions,
+  Pressable,
 } from "react-native";
 
 const logo = require("../assets/images/littleLogo.png");
-function WelcomeScreen() {
+function WelcomeScreen({ navigation }) {
   const colorScheme = useColorScheme();
   const { height, width, scale, fontScale } = useWindowDimensions();
   return (
@@ -52,6 +53,10 @@ function WelcomeScreen() {
       <Text style={styles.regular}>width:{width}</Text>
       <Text style={styles.regular}>scal:{scale}</Text>
       <Text style={styles.regular}>fontScale:{fontScale}</Text>
+
+      <Pressable onPress={() => navigation.navigate("Menu")}>
+        <Text style={styles.buttonText}> View Menu</Text>
+      </Pressable>
     </ScrollView>
   );
 }
@@ -78,10 +83,14 @@ const styles = StyleSheet.create({
     justifyContent: `center`,
   },
   regularText: {
-    fontSize: 24,
+    fontSize: 16,
     padding: 20,
     marginVertical: 8,
     color: "#EDEFEE",
+    textAlign: "center",
+  },
+  buttonText: {
+    fontSize: 20,
     textAlign: "center",
   },
 });
