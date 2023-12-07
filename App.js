@@ -41,7 +41,6 @@ export default function App() {
             component={WelcomeScreen}
             options={{
               title: `Home`,
-              headerTitle: (props) => <logoTitle {...props} />,
             }}
           />
           <Stack.Screen
