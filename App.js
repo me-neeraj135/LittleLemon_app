@@ -5,56 +5,43 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginPage from "./components/LoginPage.js";
 import WelcomeScreen from "./components/WelcomeScreen.js";
 import MenuItems from "./components/MenuItems.js";
-const logo = require("./assets/images/littleLogo.png");
-
-function logoTitle() {
-  return (
-    <Image
-      source={logo}
-      style={{
-        height: 30,
-        width: 300,
-        resizeMode: `contain`,
-        alignSelf: `center`,
-      }}
-    />
-  );
-}
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
+const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const Stack = createNativeStackNavigator();
   return (
     <>
       <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="WelcomeScreen"
-          screenOptions={{
-            headerStyle: { backgroundColor: "#333333" },
-            headerTintColor: `#fff`,
-            headerTitleStyle: {
-              fontWeight: `bold`,
-            },
-          }}
-        >
-          <Stack.Screen
-            name="Home"
-            component={WelcomeScreen}
-            options={{
-              title: `Home`,
+        <View style={styles.container}>
+          <Tab.Navigator
+            initialRouteName="Login"
+            screenOptions={({ route }) => {
+              tabBarIcon: ({ focused, color, size }) => {
+                let iconName;
+                if (route.name === `Welcome`) {
+                  iconName = focused
+                    ? `ios-information-circle`
+                    : `ios-information-circle-outline`;
+                } else if (route.name === `Login`) {
+                  iconName = `ios-list`;
+                }
+                return <Ionicons name={iconName} size={size} color={color} />;
+              };
+              tabBarActiveTintColor: `tomato`;
+              tabBarInactiveTintColor: `gray`;
             }}
-          />
-          <Stack.Screen
-            name="Menu"
-            component={MenuItems}
-            options={{ title: `Menu` }}
-          />
-        </Stack.Navigator>
+          >
+            <Tab.Screen name="Welcome" component={WelcomeScreen} />
+            <Tab.Screen name="Login" component={LoginPage} />
+          </Tab.Navigator>
+        </View>
       </NavigationContainer>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20 },
+  container: { flex: 1, backgroundColor: "#333333" },
   footer: { backgroundColor: "#495E57" },
 });
