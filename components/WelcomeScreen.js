@@ -48,15 +48,11 @@ function WelcomeScreen({ navigation }) {
         accessible={true}
         accessibilityLabel={"food picture2"}
       />
-      <Text style={styles.regular}>Color Scheme:{colorScheme}</Text>
-      <Text style={styles.regular}>height :{height}</Text>
-      <Text style={styles.regular}>width:{width}</Text>
-      <Text style={styles.regular}>scal:{scale}</Text>
-      <Text style={styles.regular}>fontScale:{fontScale}</Text>
-
-      <Pressable onPress={() => navigation.navigate("Menu")}>
-        <Text style={styles.buttonText}> View Menu</Text>
-      </Pressable>
+      <Text style={styles.infoText}>Color Scheme:{colorScheme}</Text>
+      <Text style={styles.infoText}>height :{height}</Text>
+      <Text style={styles.infoText}>width:{width}</Text>
+      <Text style={styles.infoText}>scal:{scale}</Text>
+      <Text style={styles.infoText}>fontScale:{fontScale}</Text>
     </ScrollView>
   );
 }
@@ -67,16 +63,16 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   logo: {
     height: 100,
-    width: 300,
-    marginTop: 30,
+    width: 250,
   },
   title: { padding: 20, fontSize: 22, textAlign: "center", fontWeight: `600` },
   img: {
     height: 200,
     width: `100%`,
     borderRadius: 5,
-    marginTop: 10,
+
     justifyContent: "center",
+    marginVertical: 15,
   },
   bgImg: {
     flex: 1,
@@ -84,13 +80,11 @@ const styles = StyleSheet.create({
   },
   regularText: {
     fontSize: 16,
-    padding: 20,
-    marginVertical: 8,
     color: "#EDEFEE",
     textAlign: "center",
   },
-  buttonText: {
-    fontSize: 20,
+  infoText: {
+    fontSize: 16,
     textAlign: "center",
   },
 });

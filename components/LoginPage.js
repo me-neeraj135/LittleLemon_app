@@ -17,7 +17,6 @@ function LoginPage() {
   return (
     <>
       <ScrollView style={styles.container}>
-        <LittleLemonHeader />
         <Text style={styles.headerText}>Welcome to Little Lemon</Text>
 
         {loggedIn ? (
